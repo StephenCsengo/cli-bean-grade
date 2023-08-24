@@ -12,7 +12,7 @@ class Rating(Base):
     coffee_id = Column(Integer(), ForeignKey("coffees.id"))
     rating = Column(Integer(), index=True)
 
-    user = relationship("User", backpopulates=backref("User"))
+    user = relationship("User", backref=backref("User"))
     coffee = relationship("Coffee", backref=backref("Coffee"))
 
     def __repr__(self):
