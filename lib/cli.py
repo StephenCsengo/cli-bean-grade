@@ -1,6 +1,6 @@
 from simple_term_menu import TerminalMenu
 
-from models import User, Coffee, session
+from models import User, Coffee, Rating, session
 from prettytable import PrettyTable
 
 
@@ -33,6 +33,7 @@ class Cli:
             terminal_menu = TerminalMenu(options)
             menu_index = terminal_menu.show()
 
+            # Handle showing all coffees
             if options[menu_index] == "Show All Coffees":
                 show_all_coffees = session.query(Coffee).all()
                 table = PrettyTable()
@@ -44,7 +45,19 @@ class Cli:
                         [coffee.id, coffee.roaster, coffee.name, coffee.roast_level]
                     )
 
-                print(self.current_user)
+                print(table)
+
+            # Handle showing a user's rating
+            elif options[menu_index] == "Show My Ratings":
+                user_ratings = (
+                    session.query(Rating).filter_by(user_id=self.current_user).all()
+                )
+                table = PrettyTable()
+                table.field_names = ["Coffee ID", "Rating"]
+
+                for rating in user_ratings:
+                    table.add_row([rating.coffee_id, rating.rating])
+
                 print(table)
 
         else:
