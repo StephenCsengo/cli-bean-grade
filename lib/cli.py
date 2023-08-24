@@ -1,6 +1,7 @@
 from simple_term_menu import TerminalMenu
 
 from models import User, Coffee, session
+from prettytable import PrettyTable
 
 
 class Cli:
@@ -25,6 +26,7 @@ class Cli:
     def handle_login(self):
         name = input("Enter your name: ")
         user_search = session.query(User).filter(User.name.like(name)).first()
+        self.current_user = user_search.id
         if user_search:
             print(f"Welcome {user_search}!")
             options = ["Show All Coffees", "Show My Ratings", "Search For A Coffee"]
@@ -33,7 +35,17 @@ class Cli:
 
             if options[menu_index] == "Show All Coffees":
                 show_all_coffees = session.query(Coffee).all()
-                print(show_all_coffees)
+                table = PrettyTable()
+
+                table.field_names = ["ID", "Roaster", "Name", "Roast Level"]
+
+                for coffee in show_all_coffees:
+                    table.add_row(
+                        [coffee.id, coffee.roaster, coffee.name, coffee.roast_level]
+                    )
+
+                print(self.current_user)
+                print(table)
 
         else:
             print("User not found.")
