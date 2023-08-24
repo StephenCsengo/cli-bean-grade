@@ -12,12 +12,15 @@ class Rating(Base):
     coffee_id = Column(Integer(), ForeignKey("coffees.id"))
     rating = Column(Integer(), index=True)
 
-    users = relationship("User", backref=backref("User"))
-    coffees = relationship("Coffee", backref=backref("Coffee"))
+    user = relationship("User", backpopulates=backref("User"))
+    coffee = relationship("Coffee", backref=backref("Coffee"))
 
     def __repr__(self):
         return (
-            f"Rating #{self.id}: "
-            + f"Coffee #{self.coffee_id} by {self.user_id}"
-            + f"Rating of {self.rating}"
+            f"Rating\n"
+            + f"id = {self.id}"
+            + f"user_id = {self.user_id}"
+            + f"user_name = {self.user.name}"
+            + f"coffee_id = {self.coffee}"
+            + f"rating = {self.rating}"
         )

@@ -59,6 +59,7 @@ class Cli:
                     table.add_row([rating.coffee_id, rating.rating])
 
                 print(table)
+                print(user_ratings[0])
 
         else:
             print("User not found.")
