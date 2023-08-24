@@ -2,13 +2,16 @@ from datetime import datetime
 
 from sqlalchemy import create_engine
 from sqlalchemy import ForeignKey, Column, DateTime, Integer, String
-from sqlalchemy.orm import relationship, backref
+from sqlalchemy.orm import relationship, backref, sessionmaker
 
 from sqlalchemy.ext.declarative import declarative_base
 
-engine = create_engine("sqlite:///beangrade.db")
 
 Base = declarative_base()
+
+engine = create_engine("sqlite:///db/beangrade.db")
+Session = sessionmaker(bind=engine)
+session = Session()
 
 
 class User(Base):
@@ -18,6 +21,14 @@ class User(Base):
     name = Column(String())
 
     ratings = relationship("Rating", backref=backref("User"))
+
+    @classmethod
+    def find_by_name(cls, name):
+        user = session.query(cls).get(name)
+        if user:
+            return user
+        else:
+            return "No user found!"
 
     def __repr__(self):
         return f"User #{self.id}: " + f"{self.name}"
