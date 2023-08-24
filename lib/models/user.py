@@ -24,8 +24,5 @@ class User(Base):
     def add_new_user(cls, session, name):
         user = cls(name=name)
 
-        session.add(user)
-        session.commit()
-
     def __repr__(self):
         return f"User #{self.id}: " + f"{self.name}"

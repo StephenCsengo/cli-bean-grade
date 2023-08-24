@@ -1,6 +1,6 @@
 from simple_term_menu import TerminalMenu
 
-from models import User
+from models import User, session
 
 
 class Cli:
@@ -24,13 +24,17 @@ class Cli:
 
     def handle_login(self):
         name = input("Enter your name: ")
-
-        print(name)
+        user_search = session.query(User).filter(User.name.like(name)).first()
+        if user_search:
+            print(f"Welcome {user_search}!")
+        else:
+            print("User not found.")
 
     def handle_new_user(self):
         name = input("Please enter your name: ")
-
-        print(name)
+        user = User(name=name)
+        session.add(user)
+        session.commit()
 
     def exit(self):
         print("Enjoy your coffee!")
