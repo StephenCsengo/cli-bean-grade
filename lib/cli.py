@@ -5,7 +5,7 @@ from models import User
 
 class Cli:
     def __init__(self):
-        current_user = None
+        self.current_user = None
 
     # First screen the user sees
     def entry(self):
@@ -21,6 +21,16 @@ class Cli:
             self.handle_new_user()
         else:
             self.exit()
+
+    def handle_login(self):
+        name = input("Enter your name: ")
+
+        print(name)
+
+    def handle_new_user(self):
+        name = input("Please enter your name: ")
+
+        print(name)
 
     def exit(self):
         print("Enjoy your coffee!")
