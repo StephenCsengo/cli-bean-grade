@@ -5,8 +5,8 @@ name = "pypi"
 
 [packages]
 ipdb = "*"
-sqlalchemy = "*"
 alembic = "*"
+sqlalchemy = "==1.4.41"
 
 [dev-packages]
 
