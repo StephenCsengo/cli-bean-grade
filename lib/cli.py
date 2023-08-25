@@ -53,13 +53,18 @@ class Cli:
                     session.query(Rating).filter_by(user_id=self.current_user).all()
                 )
                 table = PrettyTable()
-                table.field_names = ["Coffee ID", "Rating"]
+                table.field_names = ["Coffee", "Roast Level", "Rating"]
 
                 for rating in user_ratings:
-                    table.add_row([rating.coffee_id, rating.rating])
+                    table.add_row(
+                        [
+                            f"{rating.coffee.roaster} {rating.coffee.name}",
+                            rating.coffee.roast_level,
+                            rating.rating,
+                        ]
+                    )
 
                 print(table)
-                print(user_ratings[0])
 
         else:
             print("User not found.")
