@@ -39,6 +39,10 @@ class Coffee(Base):
     name = Column(String())
     roast_level = Column(String(), index=True)
 
+    @classmethod
+    def get_new_coffee(self):
+        pass
+
     def __repr__(self):
         return (
             f"Coffee #{self.id}: "

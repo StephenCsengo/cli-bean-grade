@@ -1,7 +1,6 @@
 from simple_term_menu import TerminalMenu
-
-from models import User, Coffee, Rating, session
 from prettytable import PrettyTable
+from models import User, Coffee, Rating, session
 
 
 class Cli:
@@ -29,7 +28,12 @@ class Cli:
         self.current_user = user_search.id
         if user_search:
             print(f"Welcome {user_search}!")
-            options = ["Show All Coffees", "Show My Ratings", "Search For A Coffee"]
+            options = [
+                "Show All Coffees",
+                "Show My Ratings",
+                "Search",
+                "Add A New Coffee",
+            ]
             terminal_menu = TerminalMenu(options)
             menu_index = terminal_menu.show()
 
@@ -52,6 +56,7 @@ class Cli:
                 user_ratings = (
                     session.query(Rating).filter_by(user_id=self.current_user).all()
                 )
+
                 table = PrettyTable()
                 table.field_names = ["Coffee", "Roast Level", "Rating"]
 
@@ -63,8 +68,13 @@ class Cli:
                             rating.rating,
                         ]
                     )
-
                 print(table)
+
+            elif options[menu_index] == "Search":
+                pass
+
+            elif options[menu_index] == "Add A New Coffee":
+                pass
 
         else:
             print("User not found.")

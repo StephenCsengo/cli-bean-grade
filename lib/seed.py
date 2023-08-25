@@ -12,7 +12,7 @@ if __name__ == "__main__":
     session.query(User).delete()
     session.commit()
 
-    users = [User(name="Stephen"), User(name="Kristin"), User(name="Test User")]
+    users = [User(name="Stephen"), User(name="Kristen"), User(name="Test User")]
     session.add_all(users)
     session.commit()
 
