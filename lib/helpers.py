@@ -1,6 +1,7 @@
 from simple_term_menu import TerminalMenu
 from prettytable import PrettyTable
 from models import User, Coffee, Rating, session
+from helper import menu
 
 
 def main_menu(self):
@@ -9,75 +10,35 @@ def main_menu(self):
         user_search = User.find_by_name(name)
         self.current_user = user_search.id
         if user_search:
-            print(f"Welcome {user_search}!")
-            options = [
-                "Show All Coffees",
-                "Show My Ratings",
-                "Search",
-                "Add A New Coffee",
-            ]
-            terminal_menu = TerminalMenu(options)
-            menu_index = terminal_menu.show()
+            menu.user_menu(self, current_user=user_search)
 
-            # Handle showing all coffees
-            if options[menu_index] == "Show All Coffees":
-                show_all_coffees = session.query(Coffee).all()
-                table = PrettyTable()
-
-                table.field_names = ["ID", "Roaster", "Name", "Roast Level"]
-
-                for coffee in show_all_coffees:
-                    table.add_row(
-                        [coffee.id, coffee.roaster, coffee.name, coffee.roast_level]
-                    )
-
-                print(table)
-
-            # Handle showing a user's rating
-            elif options[menu_index] == "Show My Ratings":
-                user_ratings = (
-                    session.query(Rating).filter_by(user_id=self.current_user).all()
-                )
-
-                table = PrettyTable()
-                table.field_names = ["Coffee", "Roast Level", "Rating"]
-
-                for rating in user_ratings:
-                    table.add_row(
-                        [
-                            f"{rating.coffee.roaster} {rating.coffee.name}",
-                            rating.coffee.roast_level,
-                            rating.rating,
-                        ]
-                    )
-                print(table)
-
-            elif options[menu_index] == "Search":
-                pass
-
-            elif options[menu_index] == "Add A New Coffee":
-                new_roaster = input("Enter the roaster: ")
-                new_name = input("Enter the coffee's name: ")
-                new_roast_level = input("Enter the roast level: ")
-                new_coffee = {
-                    "roaster": new_roaster,
-                    "name": new_name,
-                    "roast_level": new_roast_level,
-                }
-
-                print(new_coffee["roaster"])
-
-            else:
-                print("User not found.")
+        else:
+            print("User not found.")
 
     def handle_new_user(self):
         name = input("Please enter your name: ")
         User.add_new_user(name=name)
+        new_user = User.find_by_name(name)
+        self.current_user = new_user.id
+        menu.user_menu(self, current_user=new_user)
 
     # def user_menu(self):
 
     def exit(self):
-        print("Enjoy your coffee!")
+        print(
+            "    (  )   (   )  )\n"
+            "     ) (   )  (  (\n"
+            "     ( )  (    ) )\n"
+            "     _____________\n"
+            "    <_____________> ___\n"
+            "    |             |/ _ \ \n"
+            "    |               | | |\n"
+            "    |               |_| |\n"
+            " ___|             |\___/\n"
+            "/    \___________/    \ \n"
+            "\_____________________/\n"
+            "Enjoy your coffee!"
+        )
 
     options = ["Login", "Create New User", "Exit"]
     terminal_menu = TerminalMenu(options)
