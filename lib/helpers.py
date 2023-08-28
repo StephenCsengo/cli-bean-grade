@@ -72,10 +72,7 @@ def main_menu(self):
 
     def handle_new_user(self):
         name = input("Please enter your name: ")
-        user = User(name=name)
-        session.add(user)
-        session.commit()
-        print(f"User {name} created.")
+        User.add_new_user(name=name)
 
     # def user_menu(self):
 

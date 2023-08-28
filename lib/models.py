@@ -24,8 +24,11 @@ class User(Base):
             return "No user found!"
 
     @classmethod
-    def add_new_user(cls, session, name):
+    def add_new_user(cls, name):
         user = cls(name=name)
+        session.add(user)
+        session.commit()
+        print(f"User {name} created.")
 
     def __repr__(self):
         return f"User #{self.id}: " + f"{self.name}"
