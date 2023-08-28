@@ -6,7 +6,7 @@ from models import User, Coffee, Rating, session
 def main_menu(self):
     def handle_login(self):
         name = input("Enter your name: ")
-        user_search = session.query(User).filter(User.name.like(name)).first()
+        user_search = User.find_by_name(name)
         self.current_user = user_search.id
         if user_search:
             print(f"Welcome {user_search}!")

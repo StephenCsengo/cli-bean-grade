@@ -17,11 +17,11 @@ class User(Base):
 
     @classmethod
     def find_by_name(cls, name):
-        user = session.query(cls).get(name)
-        if user:
-            return user
+        user_search = session.query(User).filter(User.name.like(name)).first()
+        if user_search:
+            return user_search
         else:
-            return "No user found!"
+            return None
 
     @classmethod
     def add_new_user(cls, name):
