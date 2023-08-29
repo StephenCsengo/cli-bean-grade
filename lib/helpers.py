@@ -30,22 +30,6 @@ def main_menu(self):
         self.current_user = new_user.id
         menu.user_menu(self, current_user=new_user)
 
-    def exit(self):
-        print(
-            "    (  )   (   )  )\n"
-            "     ) (   )  (  (\n"
-            "     ( )  (    ) )\n"
-            "     _____________\n"
-            "    <_____________> ___\n"
-            "    |             |/ _ \ \n"
-            "    |               | | |\n"
-            "    |               |_| |\n"
-            " ___|             |\___/\n"
-            "/    \___________/    \ \n"
-            "\_____________________/\n"
-            "Enjoy your coffee!"
-        )
-
     options = ["Login", "Create New User", "Exit"]
     terminal_menu = TerminalMenu(options)
     menu_index = terminal_menu.show()
@@ -56,4 +40,4 @@ def main_menu(self):
     elif options[menu_index] == "Create New User":
         handle_new_user(self)
     else:
-        exit(self)
+        menu.exit(self)

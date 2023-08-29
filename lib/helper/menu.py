@@ -11,6 +11,7 @@ def user_menu(self, current_user):
         "Add A New Rating",
         "Show My Ratings",
         "Search",
+        "Exit",
     ]
     terminal_menu = TerminalMenu(options)
     menu_index = terminal_menu.show()
@@ -42,6 +43,9 @@ def user_menu(self, current_user):
 
     elif options[menu_index] == "Search":
         pass
+    # Handle exit
+    elif options[menu_index] == "Exit":
+        exit(self)
 
 
 def mini_menu(self, current_user):
@@ -53,3 +57,20 @@ def mini_menu(self, current_user):
 
     if options[menu_index] == "Back":
         user_menu(self, current_user)
+
+
+def exit(self):
+    print(
+        "    (  )   (   )  )\n"
+        "     ) (   )  (  (\n"
+        "     ( )  (    ) )\n"
+        "     _____________\n"
+        "    <_____________> ___\n"
+        "    |             |/ _ \ \n"
+        "    |               | | |\n"
+        "    |               |_| |\n"
+        " ___|             |\___/\n"
+        "/    \___________/    \ \n"
+        "\_____________________/\n"
+        "Enjoy your coffee!"
+    )

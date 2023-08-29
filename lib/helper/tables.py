@@ -15,11 +15,12 @@ def all_coffees(coffees):
 
 def all_ratings(ratings):
     table = PrettyTable()
-    table.field_names = ["Coffee", "Roast Level", "Rating"]
+    table.field_names = ["ID", "Coffee", "Roast Level", "Rating"]
 
     for rating in ratings:
         table.add_row(
             [
+                rating.id,
                 f"{rating.coffee.roaster} {rating.coffee.name}",
                 rating.coffee.roast_level,
                 rating.rating,
