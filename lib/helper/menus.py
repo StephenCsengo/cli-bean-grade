@@ -34,7 +34,7 @@ def user_menu(self, current_user):
         pass
     # Handle exit
     elif options[menu_index] == "Exit":
-        exit(self)
+        handlers.handle_exit(self)
 
 
 def mini_menu(self, current_user):
@@ -48,18 +48,15 @@ def mini_menu(self, current_user):
         user_menu(self, current_user)
 
 
-def exit(self):
-    print(
-        "    (  )   (   )  )\n"
-        "     ) (   )  (  (\n"
-        "     ( )  (    ) )\n"
-        "     _____________\n"
-        "    <_____________> ___\n"
-        "    |             |/ _ \ \n"
-        "    |               | | |\n"
-        "    |               |_| |\n"
-        " ___|             |\___/\n"
-        "/    \___________/    \ \n"
-        "\_____________________/\n"
-        "Enjoy your coffee!"
-    )
+def main_menu(self):
+    options = ["Login", "Create New User", "Exit"]
+    terminal_menu = TerminalMenu(options)
+    menu_index = terminal_menu.show()
+
+    # Handle menu selections
+    if options[menu_index] == "Login":
+        handlers.handle_login(self)
+    elif options[menu_index] == "Create New User":
+        handlers.handle_new_user(self)
+    else:
+        handlers.handle_exit(self)

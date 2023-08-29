@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from helpers import main_menu
+from helper import menus
 
 
 class Cli:
@@ -15,7 +15,7 @@ class Cli:
         print("/_____/\___/\__,_/_/ /_/\____/_/   \__,_/\__,_/\___/ ")
 
         print("Welcome to BeanGrade!")
-        main_menu(self)
+        menus.main_menu(self)
 
 
 if __name__ == "__main__":
