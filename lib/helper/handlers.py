@@ -13,6 +13,12 @@ def handle_add_coffee(self, current_user):
         menus.user_menu(self, current_user)
 
 
+def handle_add_rating(self, current_user):
+    coffee_choice = input("Enter ID of the coffee you'd like to rate: ")
+    forms.add_rating(self, coffee_id=coffee_choice)
+    menus.user_menu(self, current_user)
+
+
 def handle_show_all_coffees(self):
     show_all_coffees = session.query(Coffee).all()
     tables.all_coffees(show_all_coffees)

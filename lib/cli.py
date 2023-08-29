@@ -15,6 +15,9 @@ class Cli:
         print("/_____/\___/\__,_/_/ /_/\____/_/   \__,_/\__,_/\___/ ")
 
         print("Welcome to BeanGrade!")
+        print(
+            "Keep track of all of the specialty coffees your household has tried. Start by logging in or creating a new user."
+        )
         menus.main_menu(self)
 
 

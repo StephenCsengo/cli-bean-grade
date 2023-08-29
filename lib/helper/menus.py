@@ -21,7 +21,7 @@ def user_menu(self, current_user):
     # Handle showing all coffees
     elif options[menu_index] == "Show All Coffees":
         handlers.handle_show_all_coffees(self=self)
-        mini_menu(self, current_user=current_user)
+        mini_menu(self, current_user=current_user, append="coffees")
 
     # Handle showing a user's rating
     elif options[menu_index] == "Show My Ratings":
@@ -35,15 +35,30 @@ def user_menu(self, current_user):
         handlers.handle_exit(self)
 
 
-def mini_menu(self, current_user):
-    options = [
-        "Back",
-    ]
-    terminal_menu = TerminalMenu(options)
-    menu_index = terminal_menu.show()
+def mini_menu(self, current_user, append=None):
+    if append == None:
+        options = [
+            "Back",
+        ]
+        terminal_menu = TerminalMenu(options)
+        menu_index = terminal_menu.show()
 
-    if options[menu_index] == "Back":
-        user_menu(self, current_user)
+        if options[menu_index] == "Back":
+            user_menu(self, current_user)
+
+    elif append == "coffees":
+        options = [
+            "Rate A Coffee",
+            "Back",
+        ]
+        terminal_menu = TerminalMenu(options)
+        menu_index = terminal_menu.show()
+
+        if options[menu_index] == "Back":
+            user_menu(self, current_user)
+
+        elif options[menu_index] == "Rate A Coffee":
+            handlers.handle_add_rating(self, current_user)
 
 
 def main_menu(self):
