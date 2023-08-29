@@ -13,3 +13,8 @@ def add_coffee(self):
         name=new_coffee["name"],
         roast_level=new_coffee["roast_level"],
     )
+    print(f"New coffee {new_coffee['roaster']} {new_coffee['name']} added.")
+
+
+def add_rating(self, id):
+    pass

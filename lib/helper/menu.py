@@ -19,6 +19,11 @@ def user_menu(self, current_user):
     # Handle adding a new coffee
     if options[menu_index] == "Add A New Coffee":
         forms.add_coffee(self)
+        new_rating = input("Would you like to rate the new coffee? (Y/N):")
+        if new_rating == "Y":
+            pass
+        else:
+            user_menu(self, current_user)
 
     # Handle showing all coffees
     elif options[menu_index] == "Show All Coffees":
