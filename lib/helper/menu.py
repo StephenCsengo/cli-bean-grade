@@ -20,7 +20,7 @@ def user_menu(self, current_user):
     if options[menu_index] == "Add A New Coffee":
         forms.add_coffee(self)
         new_rating = input("Would you like to rate the new coffee? (Y/N):")
-        if new_rating == "Y":
+        if new_rating == "Y" or new_rating == "y":
             new_coffee = session.query(Coffee).order_by(Coffee.id.desc()).first()
             forms.add_rating(self, coffee_id=new_coffee.id)
             user_menu(self, current_user)

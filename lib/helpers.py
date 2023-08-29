@@ -18,7 +18,7 @@ def main_menu(self):
             create_new = input(
                 "No user found. Would you like to create a new user? (Y/N): "
             )
-            if create_new == "Y":
+            if create_new == "Y" or create_new == "y":
                 handle_new_user(self)
             else:
                 main_menu(self)
