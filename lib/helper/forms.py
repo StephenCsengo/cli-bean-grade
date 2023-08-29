@@ -13,8 +13,8 @@ def add_coffee(self):
         name=new_coffee["name"],
         roast_level=new_coffee["roast_level"],
     )
-    print(f"New coffee {new_coffee['roaster']} {new_coffee['name']} added.")
 
 
 def add_rating(self, coffee_id):
-    Rating.add_new_rating(user_id=self.current_user, coffee_id=coffee_id)
+    rating = input("Rate this coffee 1-10: ")
+    Rating.add_new_rating(user_id=self.current_user, coffee_id=coffee_id, rating=rating)

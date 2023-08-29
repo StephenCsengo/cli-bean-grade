@@ -40,16 +40,12 @@ def user_menu(self, current_user):
 def mini_menu(self, current_user):
     options = [
         "Back",
-        "Exit",
     ]
     terminal_menu = TerminalMenu(options)
     menu_index = terminal_menu.show()
 
     if options[menu_index] == "Back":
         user_menu(self, current_user)
-
-    if options[menu_index] == "Exit":
-        exit(self)
 
 
 def exit(self):

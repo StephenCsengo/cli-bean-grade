@@ -47,7 +47,7 @@ class Coffee(Base):
         coffee = cls(roaster=roaster, name=name, roast_level=roast_level)
         session.add(coffee)
         session.commit()
-        print(f"New coffee {new_coffee['roaster']} {new_coffee['name']} added.")
+        print(f"New coffee {coffee.roaster} {coffee.name} added.")
 
     @classmethod
     def find_by_id(cls, coffee_id):
@@ -76,8 +76,7 @@ class Rating(Base):
     coffee = relationship("Coffee", backref=backref("Coffee"))
 
     @classmethod
-    def add_new_rating(cls, user_id, coffee_id):
-        rating = input("Rate this coffee 1-10: ")
+    def add_new_rating(cls, user_id, coffee_id, rating):
         new_rating = Rating(user_id=user_id, coffee_id=coffee_id, rating=rating)
         session.add(new_rating)
         session.commit()
