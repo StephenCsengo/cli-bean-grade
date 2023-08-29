@@ -1,6 +1,7 @@
 from simple_term_menu import TerminalMenu
 from prettytable import PrettyTable
 from models import User, Coffee, Rating, session
+from helper import tables
 
 
 def user_menu(self, current_user):
@@ -17,31 +18,14 @@ def user_menu(self, current_user):
     # Handle showing all coffees
     if options[menu_index] == "Show All Coffees":
         show_all_coffees = session.query(Coffee).all()
-        table = PrettyTable()
 
-        table.field_names = ["ID", "Roaster", "Name", "Roast Level"]
-
-        for coffee in show_all_coffees:
-            table.add_row([coffee.id, coffee.roaster, coffee.name, coffee.roast_level])
-
-        print(table)
+        tables.all_coffees(show_all_coffees)
 
     # Handle showing a user's rating
     elif options[menu_index] == "Show My Ratings":
         user_ratings = session.query(Rating).filter_by(user_id=self.current_user).all()
 
-        table = PrettyTable()
-        table.field_names = ["Coffee", "Roast Level", "Rating"]
-
-        for rating in user_ratings:
-            table.add_row(
-                [
-                    f"{rating.coffee.roaster} {rating.coffee.name}",
-                    rating.coffee.roast_level,
-                    rating.rating,
-                ]
-            )
-        print(table)
+        tables.all_ratings(user_ratings)
 
     elif options[menu_index] == "Search":
         pass
