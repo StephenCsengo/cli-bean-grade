@@ -8,12 +8,19 @@ def main_menu(self):
     def handle_login(self):
         name = input("Enter your name: ")
         user_search = User.find_by_name(name)
-        self.current_user = user_search.id
+
         if user_search:
+            self.current_user = user_search.id
             menu.user_menu(self, current_user=user_search)
 
         else:
-            print("User not found.")
+            create_new = input(
+                "No user found. Would you like to create a new user? (Y/N): "
+            )
+            if create_new == "Y":
+                handle_new_user(self)
+            else:
+                main_menu(self)
 
     def handle_new_user(self):
         name = input("Please enter your name: ")
