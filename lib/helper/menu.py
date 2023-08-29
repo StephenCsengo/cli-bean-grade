@@ -22,6 +22,7 @@ def user_menu(self, current_user):
         if new_rating == "Y":
             new_coffee = session.query(Coffee).order_by(Coffee.id.desc()).first()
             forms.add_rating(self, coffee_id=new_coffee.id)
+            user_menu(self, current_user)
         else:
             user_menu(self, current_user)
 
@@ -30,12 +31,25 @@ def user_menu(self, current_user):
         show_all_coffees = session.query(Coffee).all()
 
         tables.all_coffees(show_all_coffees)
+        mini_menu(self, current_user=current_user)
 
     # Handle showing a user's rating
     elif options[menu_index] == "Show My Ratings":
         user_ratings = session.query(Rating).filter_by(user_id=self.current_user).all()
 
         tables.all_ratings(user_ratings)
+        mini_menu(self, current_user=current_user)
 
     elif options[menu_index] == "Search":
         pass
+
+
+def mini_menu(self, current_user):
+    options = [
+        "Back",
+    ]
+    terminal_menu = TerminalMenu(options)
+    menu_index = terminal_menu.show()
+
+    if options[menu_index] == "Back":
+        user_menu(self, current_user)

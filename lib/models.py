@@ -81,7 +81,9 @@ class Rating(Base):
         new_rating = Rating(user_id=user_id, coffee_id=coffee_id, rating=rating)
         session.add(new_rating)
         session.commit()
-        print(f"{new_rating} added to database.")
+        print(
+            f"Rating of {new_rating.rating} by {new_rating.user.name} for {new_rating.coffee.roaster} {new_rating.coffee.name} added to database."
+        )
 
     def __repr__(self):
         return (
