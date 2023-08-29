@@ -47,7 +47,7 @@ class Coffee(Base):
         coffee = cls(roaster=roaster, name=name, roast_level=roast_level)
         session.add(coffee)
         session.commit()
-        print(f"{coffee} add to database.")
+        print(f"New coffee {new_coffee['roaster']} {new_coffee['name']} added.")
 
     @classmethod
     def find_by_id(cls, coffee_id):

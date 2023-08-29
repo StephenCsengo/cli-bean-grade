@@ -1,7 +1,7 @@
 from simple_term_menu import TerminalMenu
 from prettytable import PrettyTable
 from models import User, Coffee, Rating, session
-from helper import menu
+from helper import menus
 
 
 def main_menu(self):
@@ -12,7 +12,7 @@ def main_menu(self):
         if user_search:
             self.current_user = user_search.id
             print(f"Welcome {user_search.name}!")
-            menu.user_menu(self, current_user=user_search)
+            menus.user_menu(self, current_user=user_search)
 
         else:
             create_new = input(
@@ -40,4 +40,4 @@ def main_menu(self):
     elif options[menu_index] == "Create New User":
         handle_new_user(self)
     else:
-        menu.exit(self)
+        menus.exit(self)
