@@ -1,6 +1,4 @@
 from simple_term_menu import TerminalMenu
-from prettytable import PrettyTable
-from models import User, Coffee, Rating, session
 from helper import tables, forms, handlers
 
 

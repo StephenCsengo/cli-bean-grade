@@ -1,6 +1,5 @@
 from models import User, Coffee, Rating, session
 from helper import tables, forms, menus
-from helpers import main_menu
 
 
 def handle_add_coffee(self, current_user):
