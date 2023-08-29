@@ -11,6 +11,7 @@ def main_menu(self):
 
         if user_search:
             self.current_user = user_search.id
+            print(f"Welcome {user_search.name}!")
             menu.user_menu(self, current_user=user_search)
 
         else:

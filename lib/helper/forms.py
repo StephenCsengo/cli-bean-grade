@@ -16,5 +16,6 @@ def add_coffee(self):
     print(f"New coffee {new_coffee['roaster']} {new_coffee['name']} added.")
 
 
-def add_rating(self, id):
-    pass
+def add_rating(self, coffee_id):
+    coffee = Coffee.find_by_id(coffee_id=coffee_id)
+    Rating.add_new_rating(user_id=self.current_user, coffee_id=coffee.id)
