@@ -43,8 +43,11 @@ class Coffee(Base):
     roast_level = Column(String(), index=True)
 
     @classmethod
-    def get_new_coffee(self):
-        pass
+    def add_new_coffee(cls, roaster, name, roast_level):
+        coffee = cls(roaster=roaster, name=name, roast_level=roast_level)
+        session.add(coffee)
+        session.commit()
+        print(coffee)
 
     def __repr__(self):
         return (

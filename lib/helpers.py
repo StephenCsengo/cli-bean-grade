@@ -29,8 +29,6 @@ def main_menu(self):
         self.current_user = new_user.id
         menu.user_menu(self, current_user=new_user)
 
-    # def user_menu(self):
-
     def exit(self):
         print(
             "    (  )   (   )  )\n"

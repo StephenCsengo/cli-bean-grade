@@ -1,22 +1,27 @@
 from simple_term_menu import TerminalMenu
 from prettytable import PrettyTable
 from models import User, Coffee, Rating, session
-from helper import tables
+from helper import tables, forms
 
 
 def user_menu(self, current_user):
     print(f"Welcome {current_user.name}!")
     options = [
+        "Add A New Coffee",
         "Show All Coffees",
+        "Add A New Rating",
         "Show My Ratings",
         "Search",
-        "Add A New Coffee",
     ]
     terminal_menu = TerminalMenu(options)
     menu_index = terminal_menu.show()
 
+    # Handle adding a new coffee
+    if options[menu_index] == "Add A New Coffee":
+        forms.add_coffee(self)
+
     # Handle showing all coffees
-    if options[menu_index] == "Show All Coffees":
+    elif options[menu_index] == "Show All Coffees":
         show_all_coffees = session.query(Coffee).all()
 
         tables.all_coffees(show_all_coffees)
@@ -29,15 +34,3 @@ def user_menu(self, current_user):
 
     elif options[menu_index] == "Search":
         pass
-
-    elif options[menu_index] == "Add A New Coffee":
-        new_roaster = input("Enter the roaster: ")
-        new_name = input("Enter the coffee's name: ")
-        new_roast_level = input("Enter the roast level: ")
-        new_coffee = {
-            "roaster": new_roaster,
-            "name": new_name,
-            "roast_level": new_roast_level,
-        }
-
-        print(new_coffee["roaster"])
