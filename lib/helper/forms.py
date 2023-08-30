@@ -16,5 +16,8 @@ def add_coffee(self):
 
 
 def add_rating(self, coffee_id):
-    rating = input("Rate this coffee 1-10: ")
+    rating = int(input("Rate this coffee 1-10: "))
+    while rating < 1 or rating > 10:
+        print("Rating must be between 1 and 10, please try again.")
+        rating = int(input("Rate this coffee 1-10: "))
     Rating.add_new_rating(user_id=self.current_user, coffee_id=coffee_id, rating=rating)
