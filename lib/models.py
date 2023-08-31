@@ -67,12 +67,14 @@ class Coffee(Base):
 
     @classmethod
     def update_name(cls, id, new_name):
-        session.query(cls).filter(cls.id == id).update({cls.roaster: new_name})
+        session.query(cls).filter(cls.id == id).update({cls.name: new_name})
         session.commit()
 
     @classmethod
     def update_roast_level(cls, id, new_roast_level):
-        session.query(cls).filter(cls.id == id).update({cls.roaster: new_roast_level})
+        session.query(cls).filter(cls.id == id).update(
+            {cls.roast_level: new_roast_level}
+        )
         session.commit()
 
     @classmethod

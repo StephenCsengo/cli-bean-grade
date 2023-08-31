@@ -2,48 +2,48 @@ from models import User, Coffee, Rating, session
 from helper import tables, forms, menus
 
 
-def handle_add_coffee(self, current_user):
+def handle_add_coffee(self):
     forms.add_coffee(self)
     new_rating = input("Would you like to rate the new coffee? (Y/N):")
 
     if new_rating == "Y" or new_rating == "y":
         new_coffee = Coffee.get_recent_coffee()
         forms.add_rating(self, coffee_id=new_coffee.id)
-        menus.user_menu(self, current_user)
+        menus.user_menu(self)
 
     else:
-        menus.user_menu(self, current_user)
+        menus.user_menu(self)
 
 
-def handle_add_rating(self, current_user):
+def handle_add_rating(self):
     if Coffee.get_all_coffees() == []:
         print("No coffees available to rate.")
-        menus.mini_menu(self, current_user=self.current_user)
+        menus.mini_menu(self)
     else:
         coffee_choice = input("Enter the ID of the coffee you'd like to rate: ")
         forms.add_rating(self, coffee_id=coffee_choice)
         print("Rating added!")
-        menus.user_menu(self, current_user)
+        menus.user_menu(self)
 
 
 def handle_show_all_coffees(self):
     all_coffees = Coffee.get_all_coffees()
     if all_coffees == []:
         print("No coffees to display. Try adding some.")
-        menus.mini_menu(self, current_user=self.current_user)
+        menus.mini_menu(self)
     else:
         tables.all_coffees(all_coffees)
-        menus.mini_menu(self, current_user=self.current_user, append="coffees")
+        menus.mini_menu(self, append="coffees")
 
 
 def handle_show_all_ratings(self):
     all_user_ratings = Rating.get_all_ratings(user_id=self.current_user)
     if all_user_ratings == []:
         print("No ratings to display. Try rating some coffees.")
-        menus.mini_menu(self, current_user=self.current_user)
+        menus.mini_menu(self)
     else:
         tables.all_ratings(all_user_ratings)
-        menus.mini_menu(self, current_user=self.current_user, append="ratings")
+        menus.mini_menu(self, append="ratings")
 
 
 def handle_delete_coffee(self):
@@ -67,7 +67,7 @@ def handle_delete_all_ratings(self):
         Rating.delete_by_user_id(user_id=self.current_user)
         print("All Ratings Deleted.")
 
-    menus.user_menu(self, current_user=self.current_user)
+    menus.user_menu(self)
 
 
 def handle_delete_rating(self):
@@ -80,7 +80,7 @@ def handle_delete_rating(self):
 def handle_update_rating(self):
     if Rating.get_all_ratings(user_id=self.current_user) == []:
         print("You haven't rated any coffees yet.")
-        menus.mini_menu(self, current_user=self.current_user)
+        menus.mini_menu(self)
     else:
         forms.edit_rating(self)
         print("Rating updated!")
@@ -128,7 +128,7 @@ def handle_login(self):
     if user_search:
         self.current_user = user_search.id
         print(f"\nWelcome {user_search.name}!")
-        menus.user_menu(self, current_user=user_search)
+        menus.user_menu(self)
 
     else:
         create_new = input(
@@ -147,4 +147,4 @@ def handle_new_user(self):
     User.add_new_user(name=name)
     new_user = User.find_by_name(name)
     self.current_user = new_user.id
-    menus.user_menu(self, current_user=new_user)
+    menus.user_menu(self)

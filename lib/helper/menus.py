@@ -2,7 +2,7 @@ from simple_term_menu import TerminalMenu
 from helper import tables, forms, handlers
 
 
-def user_menu(self, current_user):
+def user_menu(self):
     options = [
         "Add A New Coffee",
         "Show All Coffees",
@@ -15,12 +15,11 @@ def user_menu(self, current_user):
 
     # Handle adding a new coffee
     if options[menu_index] == "Add A New Coffee":
-        handlers.handle_add_coffee(self, current_user=current_user)
-        mini_menu(self, current_user=current_user)
+        handlers.handle_add_coffee(self)
 
     # Handle showing all coffees
     elif options[menu_index] == "Show All Coffees":
-        handlers.handle_show_all_coffees(self=self)
+        handlers.handle_show_all_coffees(self)
 
     # Handle showing a user's rating
     elif options[menu_index] == "Show My Ratings":
@@ -31,7 +30,7 @@ def user_menu(self, current_user):
         handlers.handle_exit(self)
 
 
-def mini_menu(self, current_user, append=None):
+def mini_menu(self, append=None):
     if append == None:
         options = [
             "Back",
@@ -40,7 +39,7 @@ def mini_menu(self, current_user, append=None):
         menu_index = terminal_menu.show()
 
         if options[menu_index] == "Back":
-            user_menu(self, current_user)
+            user_menu(self)
 
     elif append == "coffees":
         options = [
@@ -53,17 +52,17 @@ def mini_menu(self, current_user, append=None):
         menu_index = terminal_menu.show()
 
         if options[menu_index] == "Back":
-            user_menu(self, current_user)
+            user_menu(self)
 
         elif options[menu_index] == "Edit A Coffee":
             coffee_id = forms.select_coffee(self)
             edit_coffee_menu(self, coffee_id=coffee_id)
 
         elif options[menu_index] == "Rate A Coffee":
-            handlers.handle_add_rating(self, current_user)
+            handlers.handle_add_rating(self)
 
         elif options[menu_index] == "Delete A Coffee":
-            handlers.handle_delete_coffee(self, current_user)
+            handlers.handle_delete_coffee(self)
 
     elif append == "ratings":
         options = [
@@ -76,7 +75,7 @@ def mini_menu(self, current_user, append=None):
         menu_index = terminal_menu.show()
 
         if options[menu_index] == "Back":
-            user_menu(self, current_user)
+            user_menu(self)
 
         elif options[menu_index] == "Edit A Rating":
             handlers.handle_update_rating(self)
@@ -111,8 +110,8 @@ def edit_coffee_menu(self, coffee_id):
     if options[menu_index] == "Edit Roaster":
         handlers.handle_update_roaster(self, coffee_id=coffee_id)
     elif options[menu_index] == "Edit Name":
-        pass
+        handlers.handle_update_coffee_name(self, coffee_id=coffee_id)
     elif options[menu_index] == "Edit Roast Level":
-        pass
+        handlers.handle_update_roast_level(self, coffee_id=coffee_id)
     elif options[menu_index] == "Back":
-        mini_menu(self, self.current_user, append="coffees")
+        mini_menu(self, append="coffees")
