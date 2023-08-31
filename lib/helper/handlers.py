@@ -16,20 +16,26 @@ def handle_add_coffee(self, current_user):
 def handle_add_rating(self, current_user):
     coffee_choice = input("Enter the ID of the coffee you'd like to rate: ")
     forms.add_rating(self, coffee_id=coffee_choice)
+    print("Rating added!")
     menus.user_menu(self, current_user)
 
 
 def handle_show_all_coffees(self):
     show_all_coffees = session.query(Coffee).all()
     tables.all_coffees(show_all_coffees)
+    menus.mini_menu(self, current_user=self.current_user, append="coffees")
 
 
 def handle_show_all_ratings(self):
     user_ratings = session.query(Rating).filter_by(user_id=self.current_user).all()
     tables.all_ratings(user_ratings)
+    menus.mini_menu(self, current_user=self.current_user)
 
 
 def handle_delete_coffee(self, current_user):
+    print(
+        "WARNING! Deleting a coffee will also delete ratings associated with the coffee from all users."
+    )
     coffee_id = input("Enter the ID of the coffee you'd like to delete: ")
     Coffee.delete_by_id(coffee_id=coffee_id)
     print("The coffee has been deleted")

@@ -21,12 +21,10 @@ def user_menu(self, current_user):
     # Handle showing all coffees
     elif options[menu_index] == "Show All Coffees":
         handlers.handle_show_all_coffees(self=self)
-        mini_menu(self, current_user=current_user, append="coffees")
 
     # Handle showing a user's rating
     elif options[menu_index] == "Show My Ratings":
         handlers.handle_show_all_ratings(self)
-        mini_menu(self, current_user=current_user)
 
     elif options[menu_index] == "Search":
         pass
