@@ -70,6 +70,24 @@ def handle_update_rating(self):
     print("Rating updated!")
 
 
+def handle_update_roaster(self, coffee_id):
+    forms.edit_roaster(self, coffee_id=coffee_id)
+    print("Roaster updated!")
+    handle_show_all_coffees(self)
+
+
+def handle_update_coffee_name(self, coffee_id):
+    forms.edit_coffee_name(self, coffee_id=coffee_id)
+    print("Coffee name updated!")
+    handle_show_all_coffees(self)
+
+
+def handle_update_roast_level(self, coffee_id):
+    forms.edit_roast_level(self, coffee_id=coffee_id)
+    print("Roast level updated!")
+    handle_show_all_coffees(self)
+
+
 def handle_exit(self):
     print(
         "    (  )   (   )  )\n"

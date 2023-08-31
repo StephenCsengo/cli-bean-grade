@@ -44,6 +44,7 @@ def mini_menu(self, current_user, append=None):
 
     elif append == "coffees":
         options = [
+            "Edit A Coffee",
             "Rate A Coffee",
             "Delete A Coffee",
             "Back",
@@ -53,6 +54,10 @@ def mini_menu(self, current_user, append=None):
 
         if options[menu_index] == "Back":
             user_menu(self, current_user)
+
+        elif options[menu_index] == "Edit A Coffee":
+            coffee_id = forms.select_coffee(self)
+            edit_coffee_menu(self, coffee_id=coffee_id)
 
         elif options[menu_index] == "Rate A Coffee":
             handlers.handle_add_rating(self, current_user)
@@ -98,7 +103,16 @@ def main_menu(self):
         handlers.handle_exit(self)
 
 
-def edit_menu(self):
+def edit_coffee_menu(self, coffee_id):
     options = ["Edit Roaster", "Edit Name", "Edit Roast Level", "Back"]
     terminal_menu = TerminalMenu(options)
     menu_index = terminal_menu.show()
+
+    if options[menu_index] == "Edit Roaster":
+        handlers.handle_update_roaster(self, coffee_id=coffee_id)
+    elif options[menu_index] == "Edit Name":
+        pass
+    elif options[menu_index] == "Edit Roast Level":
+        pass
+    elif options[menu_index] == "Back":
+        mini_menu(self, self.current_user, append="coffees")
