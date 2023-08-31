@@ -29,10 +29,10 @@ def handle_show_all_coffees(self):
 def handle_show_all_ratings(self):
     user_ratings = session.query(Rating).filter_by(user_id=self.current_user).all()
     tables.all_ratings(user_ratings)
-    menus.mini_menu(self, current_user=self.current_user)
+    menus.mini_menu(self, current_user=self.current_user, append="ratings")
 
 
-def handle_delete_coffee(self, current_user):
+def handle_delete_coffee(self):
     print(
         "\nWARNING! Deleting a coffee will also delete ratings associated with the coffee from all users.\n"
     )
@@ -42,6 +42,22 @@ def handle_delete_coffee(self, current_user):
         Coffee.delete_by_id(coffee_id=coffee_id)
         print("The coffee has been deleted")
     handle_show_all_coffees(self)
+
+
+def handle_delete_all_ratings(self):
+    proceed = input("Are you sure you want to delete all of your ratings? (Y/N): ")
+    if proceed == "Y" or proceed == "y":
+        Rating.delete_by_user_id(user_id=self.current_user)
+        print("All Ratings Deleted.")
+
+    menus.user_menu(self, current_user=self.current_user)
+
+
+def handle_delete_rating(self):
+    rating = input("Enter the ID of the rating you'd like to delete: ")
+    Rating.delete_by_rating_id(id=rating)
+    print("Rating deleted.")
+    handle_show_all_ratings(self)
 
 
 def handle_exit(self):

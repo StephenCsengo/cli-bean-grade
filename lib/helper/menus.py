@@ -62,6 +62,24 @@ def mini_menu(self, current_user, append=None):
         elif options[menu_index] == "Delete A Coffee":
             handlers.handle_delete_coffee(self, current_user)
 
+    elif append == "ratings":
+        options = [
+            "Delete A Rating",
+            "Delete All My Ratings",
+            "Back",
+        ]
+        terminal_menu = TerminalMenu(options)
+        menu_index = terminal_menu.show()
+
+        if options[menu_index] == "Back":
+            user_menu(self, current_user)
+
+        elif options[menu_index] == "Delete A Rating":
+            handlers.handle_delete_rating(self)
+
+        elif options[menu_index] == "Delete All My Ratings":
+            handlers.handle_delete_all_ratings(self)
+
 
 def main_menu(self):
     options = ["Login", "Create New User", "Exit"]
