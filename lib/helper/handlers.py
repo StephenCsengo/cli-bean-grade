@@ -7,7 +7,7 @@ def handle_add_coffee(self, current_user):
     new_rating = input("Would you like to rate the new coffee? (Y/N):")
 
     if new_rating == "Y" or new_rating == "y":
-        new_coffee = session.query(Coffee).order_by(Coffee.id.desc()).first()
+        new_coffee = Coffee.get_recent_coffee()
         forms.add_rating(self, coffee_id=new_coffee.id)
         menus.user_menu(self, current_user)
 

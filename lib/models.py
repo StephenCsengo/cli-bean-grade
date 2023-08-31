@@ -80,6 +80,11 @@ class Coffee(Base):
         coffees = session.query(Coffee).all()
         return coffees
 
+    @classmethod
+    def get_recent_coffee(cls):
+        coffee = session.query(Coffee).order_by(Coffee.id.desc()).first()
+        return coffee
+
     def __repr__(self):
         return (
             f"Coffee #{self.id}: "
