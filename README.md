@@ -11,4 +11,17 @@ BeanGrade allows you to create users, add coffees, and rate these coffees. Addit
 
    `cd cli-bean-grade`
 
-3.
+3. Install required libraries from the Pipfile with
+   `pipenv install`
+
+4. Enter the virtual environment with
+   `pipenv shell`
+
+5. Navigate to the lib folder with
+   `cd lib`
+
+6. Optionally, seed the database with test data by running
+   `python seed.py`
+
+7. Start the application by running
+   `./cli.py`
