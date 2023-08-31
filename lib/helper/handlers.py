@@ -27,13 +27,23 @@ def handle_add_rating(self, current_user):
 
 
 def handle_show_all_coffees(self):
-    tables.all_coffees(Coffee.get_all_coffees())
-    menus.mini_menu(self, current_user=self.current_user, append="coffees")
+    all_coffees = Coffee.get_all_coffees()
+    if all_coffees == []:
+        print("No coffees to display. Try adding some.")
+        menus.mini_menu(self, current_user=self.current_user)
+    else:
+        tables.all_coffees(all_coffees)
+        menus.mini_menu(self, current_user=self.current_user, append="coffees")
 
 
 def handle_show_all_ratings(self):
-    tables.all_ratings(Rating.get_all_ratings(user_id=self.current_user))
-    menus.mini_menu(self, current_user=self.current_user, append="ratings")
+    all_user_ratings = Rating.get_all_ratings(user_id=self.current_user)
+    if all_user_ratings == []:
+        print("No ratings to display. Try rating some coffees.")
+        menus.mini_menu(self, current_user=self.current_user)
+    else:
+        tables.all_ratings(all_user_ratings)
+        menus.mini_menu(self, current_user=self.current_user, append="ratings")
 
 
 def handle_delete_coffee(self):
