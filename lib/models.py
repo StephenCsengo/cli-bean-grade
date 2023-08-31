@@ -116,7 +116,6 @@ class Rating(Base):
     @classmethod
     def update_rating(cls, id, new_rating):
         session.query(cls).filter(cls.id == id).update({cls.rating: new_rating})
-
         session.commit()
 
     @classmethod
