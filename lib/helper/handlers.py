@@ -23,8 +23,8 @@ def handle_add_rating(self, current_user):
 
 
 def handle_show_all_coffees(self):
-    show_all_coffees = session.query(Coffee).all()
-    tables.all_coffees(show_all_coffees)
+    all_coffees = Coffee.get_all_coffees()
+    tables.all_coffees(all_coffees)
     menus.mini_menu(self, current_user=self.current_user, append="coffees")
 
 
@@ -66,8 +66,13 @@ def handle_delete_rating(self):
 
 
 def handle_update_rating(self):
-    forms.edit_rating(self)
-    print("Rating updated!")
+    ratings = Rating.get_all_ratings(user_id=self.current_user)
+    if ratings == []:
+        print("You haven't rated any coffees yet.")
+        menus.mini_menu(self, current_user=self.current_user)
+    else:
+        forms.edit_rating(self)
+        print("Rating updated!")
 
 
 def handle_update_roaster(self, coffee_id):

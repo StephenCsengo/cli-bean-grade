@@ -75,6 +75,11 @@ class Coffee(Base):
         session.query(cls).filter(cls.id == id).update({cls.roaster: new_roast_level})
         session.commit()
 
+    @classmethod
+    def get_all_coffees(cls):
+        coffees = session.query(Coffee).all()
+        return coffees
+
     def __repr__(self):
         return (
             f"Coffee #{self.id}: "
@@ -124,10 +129,15 @@ class Rating(Base):
 
     @classmethod
     def delete_by_user_id(cls, user_id):
-        rating_removal = session.query(cls).filter(cls.user_id == user_id).all()
+        rating_removal = Rating.get_all_ratings(user_id=user_id)
         for rating in rating_removal:
             session.delete(rating)
             session.commit()
+
+    @classmethod
+    def get_all_ratings(cls, user_id):
+        ratings = session.query(cls).filter(cls.user_id == user_id).all()
+        return ratings
 
     def __repr__(self):
         return (
