@@ -51,15 +51,13 @@ class Coffee(Base):
 
     @classmethod
     def find_by_id(cls, coffee_id):
-        coffee_id_search = (
-            session.query(Coffee).filter(Coffee.id.like(coffee_id)).first()
-        )
+        coffee_id_search = session.query(cls).filter(cls.id.like(coffee_id)).first()
         return coffee_id_search
 
     @classmethod
     def delete_by_id(cls, coffee_id):
         Rating.delete_by_coffee_id(coffee_id=coffee_id)
-        coffee_removal = session.query(Coffee).filter(Coffee.id == coffee_id).delete()
+        coffee_removal = session.query(cls).filter(cls.id == coffee_id).delete()
         session.commit()
 
     def __repr__(self):
@@ -83,7 +81,7 @@ class Rating(Base):
 
     @classmethod
     def add_new_rating(cls, user_id, coffee_id, rating):
-        new_rating = Rating(user_id=user_id, coffee_id=coffee_id, rating=rating)
+        new_rating = cls(user_id=user_id, coffee_id=coffee_id, rating=rating)
         session.add(new_rating)
         session.commit()
         print(
@@ -92,9 +90,20 @@ class Rating(Base):
 
     @classmethod
     def delete_by_coffee_id(cls, coffee_id):
-        rating_removal = (
-            session.query(Rating).filter(Rating.coffee_id == coffee_id).all()
-        )
+        rating_removal = session.query(cls).filter(cls.coffee_id == coffee_id).all()
+        for rating in rating_removal:
+            session.delete(rating)
+            session.commit()
+
+    @classmethod
+    def delete_by_rating_id(cls, id):
+        rating_removal = session.query(cls).filter(cls.id == id).first()
+        session.delete(rating_removal)
+        session.commit()
+
+    @classmethod
+    def delete_by_user_id(cls, user_id):
+        rating_removal = session.query(cls).filter(cls.user_id == user_id).all()
         for rating in rating_removal:
             session.delete(rating)
             session.commit()

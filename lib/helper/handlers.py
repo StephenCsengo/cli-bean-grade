@@ -34,11 +34,13 @@ def handle_show_all_ratings(self):
 
 def handle_delete_coffee(self, current_user):
     print(
-        "WARNING! Deleting a coffee will also delete ratings associated with the coffee from all users."
+        "\nWARNING! Deleting a coffee will also delete ratings associated with the coffee from all users.\n"
     )
-    coffee_id = input("Enter the ID of the coffee you'd like to delete: ")
-    Coffee.delete_by_id(coffee_id=coffee_id)
-    print("The coffee has been deleted")
+    proceed = input("Do you wish to proceed? (Y/N): ")
+    if proceed == "Y" or proceed == "y":
+        coffee_id = input("Enter the ID of the coffee you'd like to delete: ")
+        Coffee.delete_by_id(coffee_id=coffee_id)
+        print("The coffee has been deleted")
     handle_show_all_coffees(self)
 
 
