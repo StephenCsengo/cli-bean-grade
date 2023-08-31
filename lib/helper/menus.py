@@ -8,7 +8,6 @@ def user_menu(self, current_user):
         "Show All Coffees",
         "Add A New Rating",
         "Show My Ratings",
-        "Search",
         "Exit",
     ]
     terminal_menu = TerminalMenu(options)
@@ -18,6 +17,7 @@ def user_menu(self, current_user):
     if options[menu_index] == "Add A New Coffee":
         handlers.handle_add_coffee(self, current_user=current_user)
         mini_menu(self, current_user=current_user)
+
     # Handle showing all coffees
     elif options[menu_index] == "Show All Coffees":
         handlers.handle_show_all_coffees(self=self)
@@ -26,8 +26,6 @@ def user_menu(self, current_user):
     elif options[menu_index] == "Show My Ratings":
         handlers.handle_show_all_ratings(self)
 
-    elif options[menu_index] == "Search":
-        pass
     # Handle exit
     elif options[menu_index] == "Exit":
         handlers.handle_exit(self)
@@ -98,3 +96,9 @@ def main_menu(self):
         handlers.handle_new_user(self)
     else:
         handlers.handle_exit(self)
+
+
+def edit_menu(self):
+    options = ["Edit Roaster", "Edit Name", "Edit Roast Level", "Back"]
+    terminal_menu = TerminalMenu(options)
+    menu_index = terminal_menu.show()

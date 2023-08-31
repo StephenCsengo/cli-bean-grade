@@ -60,6 +60,21 @@ class Coffee(Base):
         coffee_removal = session.query(cls).filter(cls.id == coffee_id).delete()
         session.commit()
 
+    @classmethod
+    def update_roaster(cls, id, new_roaster):
+        session.query(cls).filter(cls.id == id).update({cls.roaster: new_roaster})
+        session.commit()
+
+    @classmethod
+    def update_name(cls, id, new_name):
+        session.query(cls).filter(cls.id == id).update({cls.roaster: new_name})
+        session.commit()
+
+    @classmethod
+    def update_roast_level(cls, id, new_roast_level):
+        session.query(cls).filter(cls.id == id).update({cls.roaster: new_roast_level})
+        session.commit()
+
     def __repr__(self):
         return (
             f"Coffee #{self.id}: "
@@ -90,9 +105,8 @@ class Rating(Base):
 
     @classmethod
     def update_rating(cls, id, new_rating):
-        rating = (
-            session.query(cls).filter(cls.id == id).update({cls.rating: new_rating})
-        )
+        session.query(cls).filter(cls.id == id).update({cls.rating: new_rating})
+
         session.commit()
 
     @classmethod

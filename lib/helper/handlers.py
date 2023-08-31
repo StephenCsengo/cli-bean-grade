@@ -5,10 +5,12 @@ from helper import tables, forms, menus
 def handle_add_coffee(self, current_user):
     forms.add_coffee(self)
     new_rating = input("Would you like to rate the new coffee? (Y/N):")
+
     if new_rating == "Y" or new_rating == "y":
         new_coffee = session.query(Coffee).order_by(Coffee.id.desc()).first()
         forms.add_rating(self, coffee_id=new_coffee.id)
         menus.user_menu(self, current_user)
+
     else:
         menus.user_menu(self, current_user)
 
@@ -37,15 +39,18 @@ def handle_delete_coffee(self):
         "\nWARNING! Deleting a coffee will also delete ratings associated with the coffee from all users.\n"
     )
     proceed = input("Do you wish to proceed? (Y/N): ")
+
     if proceed == "Y" or proceed == "y":
         coffee_id = input("Enter the ID of the coffee you'd like to delete: ")
         Coffee.delete_by_id(coffee_id=coffee_id)
         print("The coffee has been deleted.")
+
     handle_show_all_coffees(self)
 
 
 def handle_delete_all_ratings(self):
     proceed = input("Are you sure you want to delete all of your ratings? (Y/N): ")
+
     if proceed == "Y" or proceed == "y":
         Rating.delete_by_user_id(user_id=self.current_user)
         print("All Ratings Deleted.")
@@ -95,8 +100,10 @@ def handle_login(self):
         create_new = input(
             "No user found. Would you like to create a new user? (Y/N): "
         )
+
         if create_new == "Y" or create_new == "y":
             handle_new_user(self)
+
         else:
             menus.main_menu(self)
 
