@@ -6,7 +6,6 @@ def user_menu(self):
     options = [
         "Add A New Coffee",
         "Show All Coffees",
-        "Add A New Rating",
         "Show My Ratings",
         "Exit",
     ]
