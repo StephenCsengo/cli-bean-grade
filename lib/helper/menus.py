@@ -64,6 +64,7 @@ def mini_menu(self, current_user, append=None):
 
     elif append == "ratings":
         options = [
+            "Edit A Rating",
             "Delete A Rating",
             "Delete All My Ratings",
             "Back",
@@ -73,6 +74,10 @@ def mini_menu(self, current_user, append=None):
 
         if options[menu_index] == "Back":
             user_menu(self, current_user)
+
+        elif options[menu_index] == "Edit A Rating":
+            handlers.handle_update_rating(self)
+            handlers.handle_show_all_ratings(self)
 
         elif options[menu_index] == "Delete A Rating":
             handlers.handle_delete_rating(self)

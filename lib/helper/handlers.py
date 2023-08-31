@@ -40,7 +40,7 @@ def handle_delete_coffee(self):
     if proceed == "Y" or proceed == "y":
         coffee_id = input("Enter the ID of the coffee you'd like to delete: ")
         Coffee.delete_by_id(coffee_id=coffee_id)
-        print("The coffee has been deleted")
+        print("The coffee has been deleted.")
     handle_show_all_coffees(self)
 
 
@@ -58,6 +58,11 @@ def handle_delete_rating(self):
     Rating.delete_by_rating_id(id=rating)
     print("Rating deleted.")
     handle_show_all_ratings(self)
+
+
+def handle_update_rating(self):
+    forms.edit_rating(self)
+    print("Rating updated!")
 
 
 def handle_exit(self):

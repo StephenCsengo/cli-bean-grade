@@ -89,6 +89,13 @@ class Rating(Base):
         )
 
     @classmethod
+    def update_rating(cls, id, new_rating):
+        rating = (
+            session.query(cls).filter(cls.id == id).update({cls.rating: new_rating})
+        )
+        session.commit()
+
+    @classmethod
     def delete_by_coffee_id(cls, coffee_id):
         rating_removal = session.query(cls).filter(cls.coffee_id == coffee_id).all()
         for rating in rating_removal:
