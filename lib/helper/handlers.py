@@ -16,10 +16,15 @@ def handle_add_coffee(self, current_user):
 
 
 def handle_add_rating(self, current_user):
-    coffee_choice = input("Enter the ID of the coffee you'd like to rate: ")
-    forms.add_rating(self, coffee_id=coffee_choice)
-    print("Rating added!")
-    menus.user_menu(self, current_user)
+    coffees = Coffee.get_all_coffees()
+    if coffees == []:
+        print("No coffees available to rate.")
+        menus.mini_menu(self, current_user=self.current_user)
+    else:
+        coffee_choice = input("Enter the ID of the coffee you'd like to rate: ")
+        forms.add_rating(self, coffee_id=coffee_choice)
+        print("Rating added!")
+        menus.user_menu(self, current_user)
 
 
 def handle_show_all_coffees(self):
