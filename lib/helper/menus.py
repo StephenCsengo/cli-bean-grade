@@ -49,6 +49,7 @@ def mini_menu(self, current_user, append=None):
     elif append == "coffees":
         options = [
             "Rate A Coffee",
+            "Delete A Coffee",
             "Back",
         ]
         terminal_menu = TerminalMenu(options)
@@ -59,6 +60,9 @@ def mini_menu(self, current_user, append=None):
 
         elif options[menu_index] == "Rate A Coffee":
             handlers.handle_add_rating(self, current_user)
+
+        elif options[menu_index] == "Delete A Coffee":
+            handlers.handle_delete_coffee(self, current_user)
 
 
 def main_menu(self):

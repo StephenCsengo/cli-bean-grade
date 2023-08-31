@@ -56,6 +56,12 @@ class Coffee(Base):
         )
         return coffee_id_search
 
+    @classmethod
+    def delete_by_id(cls, coffee_id):
+        Rating.delete_by_coffee_id(coffee_id=coffee_id)
+        coffee_removal = session.query(Coffee).filter(Coffee.id == coffee_id).delete()
+        session.commit()
+
     def __repr__(self):
         return (
             f"Coffee #{self.id}: "
@@ -83,6 +89,15 @@ class Rating(Base):
         print(
             f"Rating of {new_rating.rating} by {new_rating.user.name} for {new_rating.coffee.roaster} {new_rating.coffee.name} added to database."
         )
+
+    @classmethod
+    def delete_by_coffee_id(cls, coffee_id):
+        rating_removal = (
+            session.query(Rating).filter(Rating.coffee_id == coffee_id).all()
+        )
+        for rating in rating_removal:
+            session.delete(rating)
+            session.commit()
 
     def __repr__(self):
         return (

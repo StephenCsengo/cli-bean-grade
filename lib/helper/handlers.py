@@ -14,7 +14,7 @@ def handle_add_coffee(self, current_user):
 
 
 def handle_add_rating(self, current_user):
-    coffee_choice = input("Enter ID of the coffee you'd like to rate: ")
+    coffee_choice = input("Enter the ID of the coffee you'd like to rate: ")
     forms.add_rating(self, coffee_id=coffee_choice)
     menus.user_menu(self, current_user)
 
@@ -27,6 +27,13 @@ def handle_show_all_coffees(self):
 def handle_show_all_ratings(self):
     user_ratings = session.query(Rating).filter_by(user_id=self.current_user).all()
     tables.all_ratings(user_ratings)
+
+
+def handle_delete_coffee(self, current_user):
+    coffee_id = input("Enter the ID of the coffee you'd like to delete: ")
+    Coffee.delete_by_id(coffee_id=coffee_id)
+    print("The coffee has been deleted")
+    handle_show_all_coffees(self)
 
 
 def handle_exit(self):
@@ -52,7 +59,7 @@ def handle_login(self):
 
     if user_search:
         self.current_user = user_search.id
-        print(f"Welcome {user_search.name}!")
+        print(f"\nWelcome {user_search.name}!")
         menus.user_menu(self, current_user=user_search)
 
     else:
