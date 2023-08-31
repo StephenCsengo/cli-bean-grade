@@ -22,7 +22,6 @@ def handle_add_rating(self):
     else:
         coffee_choice = input("Enter the ID of the coffee you'd like to rate: ")
         forms.add_rating(self, coffee_id=coffee_choice)
-        print("Rating added!")
         menus.user_menu(self)
 
 
