@@ -21,7 +21,18 @@ def add_rating(self, coffee_id):
 
 
 def edit_rating(self):
-    id = input("Enter the ID of the rating you'd like to edit: ")
+    all_ratings = Rating.get_all_ratings(self.current_user)
+    all_rating_ids = []
+    for rating in all_ratings:
+        all_rating_ids.append(rating.id)
+
+    id = int(input("Enter the ID of the rating you'd like to edit: "))
+    while id not in all_rating_ids:
+        id = int(
+            input(
+                "Entered ID is not valid. Enter the ID of the rating you'd like to edit: "
+            )
+        )
     rating = get_rating(self)
     Rating.update_rating(id=id, new_rating=rating)
 
@@ -35,8 +46,19 @@ def get_rating(self):
 
 
 def select_coffee(self):
-    coffee = input("Enter the ID of the coffee you'd like to edit: ")
-    return coffee
+    all_coffees = Coffee.get_all_coffees()
+    all_coffee_ids = []
+    for coffee in all_coffees:
+        all_coffee_ids.append(coffee.id)
+
+    selected_coffee = int(input("Enter the ID of the coffee you'd like to edit: "))
+    while selected_coffee not in all_coffee_ids:
+        selected_coffee = int(
+            input(
+                "Entered ID is not valid. Enter the ID of the coffee you'd like to edit: "
+            )
+        )
+    return selected_coffee
 
 
 def edit_roaster(self, coffee_id):
