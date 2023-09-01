@@ -31,6 +31,18 @@ BeanGrade allows you to create users, add coffees, and rate these coffees. Addit
 
    `./cli.py`
 
+## Usage
+
+A video walkthrough of using the app can be found below.
+
+<a href="https://www.youtube.com/watch?v=DJPtMv0rqJ4
+" target="_blank"><img src="https://img.youtube.com/vi/DJPtMv0rqJ4/0.jpg" 
+alt="BeanGrade Walkthrough Video" width="240" height="180" border="10" /></a>
+
+## Schema
+
+<img src="https://i.imgur.com/kl86aeL.png" alt="BeanGrade Schema" width="600">
+
 ## Contributions
 
 Contributions are welcome! Please fork the repository and create a new branch for your features or bug fixes. Submit a pull request describing your changes.
